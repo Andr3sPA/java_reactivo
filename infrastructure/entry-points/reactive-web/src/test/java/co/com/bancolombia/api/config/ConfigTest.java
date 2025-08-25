@@ -1,7 +1,9 @@
 package co.com.bancolombia.api.config;
 
+import co.com.bancolombia.api.Handler;
 import co.com.bancolombia.api.RouterRest;
 import co.com.bancolombia.model.Priority;
+import co.com.bancolombia.model.Task;
 import co.com.bancolombia.usecase.task.TaskUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

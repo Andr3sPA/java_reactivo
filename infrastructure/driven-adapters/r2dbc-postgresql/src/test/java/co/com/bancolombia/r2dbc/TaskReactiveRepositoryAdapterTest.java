@@ -1,6 +1,8 @@
 package co.com.bancolombia.r2dbc;
 
 import co.com.bancolombia.model.Priority;
+import co.com.bancolombia.model.Task;
+import co.com.bancolombia.r2dbc.entity.TaskEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

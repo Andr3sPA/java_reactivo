@@ -38,7 +38,8 @@ cors:
 
 routes:
   paths:
-    loanApplication: "/api/v1/solicitud"
+    tasks: "/api/v1/tasks"
+    tasksById: "/api/v1/tasks/{id}"
 
 adapters:
   restconsumer:

@@ -7,8 +7,10 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class State {
-    private Long id;
-    private String name;
+public class Task {
+    private String id;
+    private String title;
     private String description;
+    private Priority priority;
+    private boolean completed;
 }

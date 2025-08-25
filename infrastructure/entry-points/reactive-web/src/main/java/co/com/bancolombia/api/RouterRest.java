@@ -1,6 +1,6 @@
 package co.com.bancolombia.api;
 
-import co.com.bancolombia.api.config.LoanAppPath;
+import co.com.bancolombia.api.config.TaskPath;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,26 +14,15 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @RequiredArgsConstructor
 public class RouterRest {
 
-    private final LoanAppPath loanAppPath;
+    private final TaskPath taskPath;
+    private final Handler taskHandler;
 
     @Bean
-    @RouterOperation(
-            path = "/api/v1/solicitud",
-            produces = { MediaType.APPLICATION_JSON_VALUE },
-            method = RequestMethod.POST,
-            beanClass = HandlerLoanApp.class,
-            beanMethod = "saveLoanApp",
-            operation = @Operation(
-                    operationId = "saveLoanApp",
-                    summary = "Crear solicitud de préstamo",
-                    description = "Crea una nueva solicitud de préstamo en el sistema",
-                    responses = {
-                            @ApiResponse(responseCode = "200", description = "Solicitud creada"),
-                            @ApiResponse(responseCode = "400", description = "Datos inválidos")
-                    }
-            )
-    )
-    public RouterFunction<ServerResponse> routerFunction(HandlerLoanApp handlerLoanApp) {
-        return route(POST(loanAppPath.getLoanApplication()), handlerLoanApp::saveLoanApp);
+    public RouterFunction<ServerResponse> routerFunction(Handler handler) {
+        return route(POST(taskPath.getTasks()), taskHandler::listenSaveTask)
+                .andRoute(PUT(taskPath.getTasks()), taskHandler::listenUpdateTask)
+                .andRoute(DELETE(taskPath.getTasksById()), taskHandler::listenDeleteTask)
+                .andRoute(GET(taskPath.getTasks()), taskHandler::listenGetAllTasks)
+                .andRoute(GET(taskPath.getTasksById()), taskHandler::listenGetTaskById);
     }
 }
