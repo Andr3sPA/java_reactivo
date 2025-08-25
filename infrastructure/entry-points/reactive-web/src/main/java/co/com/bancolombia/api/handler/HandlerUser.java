@@ -12,12 +12,12 @@ import reactor.core.publisher.Mono;
 @Component
 @RequiredArgsConstructor
 public class HandlerUser {
-    private final UserUseCase userUserCase;
+    private final UserUseCase userUseCase;
     public Mono<ServerResponse> registerUser(ServerRequest serverRequest){
         Mono<User> incomingObject = serverRequest.bodyToMono(User.class);
         return incomingObject.flatMap(object->ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userUserCase.register(object), Object.class));
+                .body(userUseCase.register(object), Object.class));
     }
 }
